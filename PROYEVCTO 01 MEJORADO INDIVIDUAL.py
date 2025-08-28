@@ -1,10 +1,10 @@
 from itertools import product
 
-
 class Categoria:
     def __init__(self, id_categoria, nombre):
         self.id_categoria=id_categoria
         self.nombre=nombre
+        self.cargar_categoria()
 
     def __str__(self):
         return{
@@ -13,6 +13,10 @@ class Categoria:
         }
 
 class Producto:
+    def __init__(self):
+        self.producto={}
+        self.cargar_productos()
+
     def __init__(self, id_producto, nombre, precio, categoria, stock, total_compras=0, total_ventas=0):
         self.id_producto=id_producto
         self.nombre=nombre
@@ -35,6 +39,9 @@ class Producto:
         }
 
 class Cliente:
+    def __init__(self):
+        self.clientes={}
+        self.cargar_clientes()
     def __init__(self, nit, nombre, direccion, telefono, correo):
         self.nit=nit
         self.nombre=nombre
@@ -52,6 +59,9 @@ class Cliente:
         }
 
 class proveedor:
+    def __init__(self):
+        self.proveedores={}
+        self.cargar_proveedores()
     def __init__(self, nit, nombre, direccion, telefono, correo, empresa):
         self.nir=nit
         self.nombre=nombre
@@ -70,6 +80,9 @@ class proveedor:
             "empresa":self.empresa
         }
 class empleado:
+    def __init__(self):
+        self.empleado={}
+        self.cargar_empleado()
     def __init__(self, id_empleado, nombre, direccion,  telefono, correo, puesto):
         self.id_empleado=id_empleado
         self.nombre=nombre
@@ -132,7 +145,7 @@ class detalle_compra:
         return {
             "id_detalle_compra":self.id_detalle,
             "producto":self.producto,
-            ""
+            "cantidad":self.cantidad         #VERIFICAR
         }
 
 class Venta:
@@ -217,4 +230,31 @@ def registrar_venta():
     for p in productos:
         print(f"{p.id_productos}.{p.nombre}(stock{p.stock})")
 
-    id_producto=int
+    id_producto=int(input("seleccione el id del prodcuto: "))
+        producto=
+
+    if producto is None or cliente is None:
+        print("cliente o producto no encontrado")
+        return
+
+    cantidad=int(input("ingrese cantidad: "))
+    if cantidad>producto.stock:
+        print("no hay suficiente en stock")
+        return
+
+    producto.stock-=cantidad
+    id_venta=len(ventas)+1
+    venta=Venta(id_venta, cliente, producto, cantidad)
+    ventas.append(venta)
+    print("venta registrada con exito")
+
+    def mostrar_todo():
+        print("clientes")
+        for c in clientes:
+            print(c.diccionario())
+        print("proveedores")
+        for p in proveedores:
+            print(p.diccionario())
+        print ("productos")
+        for p in productos:
+            print("a.diccionario")
