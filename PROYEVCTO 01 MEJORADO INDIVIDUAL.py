@@ -1,3 +1,6 @@
+from itertools import product
+
+
 class Categoria:
     def __init__(self, id_categoria, nombre):
         self.id_categoria=id_categoria
@@ -31,7 +34,7 @@ class Producto:
             "categoria":self.categoria.nombre
         }
 
-class cliente:
+class Cliente:
     def __init__(self, nit, nombre, direccion, telefono, correo):
         self.nit=nit
         self.nombre=nombre
@@ -100,3 +103,118 @@ class detalles_ventas:
         }
 
 class venta:
+    def __init__(self, id_venta, empleado, cliente, fecha):
+        self.id_venta=id_venta
+        self.empleado=empleado
+        self.cliente=cliente
+        self.fecha=fecha
+        self.detalles=[]
+
+    def agrefar_detalles(self,detalle):
+        self.detalles.append(detalle)
+
+    def diccionario(self):
+        return {
+            "id_venta":self.id_venta,
+            "empleado":self.empleado.nommbre,
+            "fecha":self.fecha,
+            "detalles": [d.diccionario()for d in self.detalles],
+            "total":sum(d.cantidad*d.producto.precio for d in self.detalles)
+        }
+
+class detalle_compra:
+    def __init__(self, id_detalle, producto, cantidad):
+        self.id_detalle=id_detalle
+        self.producto=producto
+        self.cantidad=cantidad
+
+    def diccionario(self):
+        return {
+            "id_detalle_compra":self.id_detalle,
+            "producto":self.producto,
+            ""
+        }
+
+class Venta:
+    def __init__(self, id_venta, cliente, producto, cantidad):
+        self.id_venta = id_venta
+        self.cliente = cliente
+        self.producto = producto
+        self.cantidad = cantidad
+        self.total = producto.precio * cantidad
+
+    def a_diccionario(self):
+        return {
+            "ID_Venta": self.id_venta,
+            "Cliente": self.cliente.nombre,
+            "Producto": self.producto.nombre,
+            "Cantidad": self.cantidad,
+            "Total": self.total
+        }
+clientes =[]
+proveedores=[]
+productos=[]
+ventas=[]
+
+def registrar_cliente():
+    id_cliente=len(clientes)+1
+    nombre=input("ingrese el nombre del cliente: ")
+    telefono=input("ingrese telefono: ")
+    cliente = Cliente("id_cliente, nombre, telefono")
+    clientes.append(cliente)
+    print("cliente registrado")
+
+def registrar_proveedor():
+    id_proveedor=len(proveedores)+1
+    nombre = input("ingrese el nombre del cliente: ")
+    correo = input("ingrese correo: ")
+    proveedor = input("ingrese el nombre del proveedor: ")
+    proveedores.append(proveedor)
+    print("proveedor registrado")
+
+def registrar_producto():
+    id_producto=len(productos)+1
+    nombre = input("ingrese el nombre del producto: ")
+    precio=input(float("ingrese el precio del producto: "))
+    stock=int(input("ingrese stock: "))
+    categoria=input("ingrese categoria: ")
+
+    if len(proveedores)==0:
+        print("debe ingresar un proveedor primero: ")
+        return
+
+    print("lista de proveedores: ")
+    for p in proveedores:
+        print(f"{p.id_proveedores}.{p.nombre}")
+
+    id_proveedor=int(input("ingrese el id del proveedor: "))
+    proveedor=
+
+    if proveedor is None:
+        print("proveedor no encontrado")
+        return
+
+    producto = Producto=(id_producto, nombre, precio, stock, categoria, proveedor)
+    productos.append(producto)
+    print("prodcuto registrado")
+
+def registrar_venta():
+    if len(clientes)==0;
+        print("debe registrar un cliente primero")
+        return
+    if len(productos)==0;
+        print("debeb registrar un producto primero")
+        return
+
+    print("lista de clientes: ")
+    for c in clientes:
+        print (f"{c.id_cliente}.{c.nombre}")
+
+    id.cliente=int(input("ingrese el id del cliente: "))
+    cliente=
+
+    print("lista de productos: ")
+    for p in productos:
+        print(f"{p.id_productos}.{p.nombre}(stock{p.stock})")
+
+    id_producto=int
