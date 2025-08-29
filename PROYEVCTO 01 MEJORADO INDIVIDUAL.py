@@ -16,7 +16,7 @@ class Producto:
     def __init__(self):
         self.producto={}
         self.cargar_productos()
-
+        
     def __init__(self, id_producto, nombre, precio, categoria, stock, total_compras=0, total_ventas=0):
         self.id_producto=id_producto
         self.nombre=nombre
@@ -201,7 +201,11 @@ def registrar_producto():
         print(f"{p.id_proveedores}.{p.nombre}")
 
     id_proveedor=int(input("ingrese el id del proveedor: "))
-    proveedor=
+    prov = None
+    for p in proveedores:
+        if p.id_proveedor == id_proveedor:
+            prov = p.nombre
+            break
 
     if proveedor is None:
         print("proveedor no encontrado")
@@ -212,10 +216,10 @@ def registrar_producto():
     print("prodcuto registrado")
 
 def registrar_venta():
-    if len(clientes)==0;
+    if len(clientes)==0:
         print("debe registrar un cliente primero")
         return
-    if len(productos)==0;
+    if len(productos)==0:
         print("debeb registrar un producto primero")
         return
 
@@ -224,14 +228,23 @@ def registrar_venta():
         print (f"{c.id_cliente}.{c.nombre}")
 
     id.cliente=int(input("ingrese el id del cliente: "))
-    cliente=
+
+    cliente = None
+    for c in clientes:
+        if c.id_cliente == id_cliente:
+            cliente = c
+            break
 
     print("lista de productos: ")
     for p in productos:
         print(f"{p.id_productos}.{p.nombre}(stock{p.stock})")
 
     id_producto=int(input("seleccione el id del prodcuto: "))
-        producto=
+    producto = None
+    for p in productos:
+        if p.id_producto == id_producto:
+            producto = p
+            break
 
     if producto is None or cliente is None:
         print("cliente o producto no encontrado")
@@ -248,13 +261,43 @@ def registrar_venta():
     ventas.append(venta)
     print("venta registrada con exito")
 
-    def mostrar_todo():
-        print("clientes")
-        for c in clientes:
-            print(c.diccionario())
-        print("proveedores")
-        for p in proveedores:
-            print(p.diccionario())
-        print ("productos")
-        for p in productos:
-            print("a.diccionario")
+def mostrar_todo():
+    print("clientes")
+    for c in clientes:
+        print(c.diccionario())
+    print("proveedores")
+    for p in proveedores:
+        print(p.diccionario())
+    print ("productos")
+    for p in productos:
+        print("a.diccionario")
+    print()
+
+while True:
+    print("1. Registrar Cliente")
+    print("2. Registrar Proveedor")
+    print("3. Registrar Producto")
+    print("4. Registrar Venta")
+    print("5. Mostrar Todo")
+    print("6. Salir")
+
+    opcion = input("Seleccione una opción: ")
+
+    if opcion == "1":
+        registrar_cliente()
+    elif opcion == "2":
+        registrar_proveedor()
+    elif opcion == "3":
+        registrar_producto()
+    elif opcion == "4":
+        registrar_venta()
+    elif opcion == "5":
+        mostrar_todo()
+    elif opcion == "6":
+        confirmar = input("¿Está seguro que quiere salir? (s/n): ")
+        if confirmar.lower() == "s":
+            print("Saliendo del sistema...")
+            break
+    else:
+        print("Opción no válida.\n")
+
